@@ -1,0 +1,29 @@
+post:
+  summary: Register a new user account and send a verification email
+  description: The first account registered in the system is assigned the `Admin` role, other accounts are assigned the `User` role.
+  operationId: register
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../types/account-new-register.yaml'
+          required:
+            - title
+            - firstName
+            - lastName
+            - email
+            - password
+            - confirmPassword
+            - acceptTerms
+  responses:
+    "200":
+      description: The registration request was successful and a verification email has been sent to the specified email address
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Registration successful, please check your email for verification instructions"

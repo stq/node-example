@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Node.js Sign-up and Verification API
+  description: Node.js + MongoDB - API with email sign-up, verification, authentication and forgot password
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:4000
+    description: Local development server
+
+paths:
+  /accounts/authenticate:
+    $ref: './schema/accounts/authenticate.yaml'
+  /accounts/refresh-token:
+    $ref: './schema/accounts/refresh-token.yaml'
+  /accounts/revoke-token:
+    $ref: './schema/accounts/revoke-token.yaml'
+  /accounts/register:
+    $ref: './schema/accounts/register.yaml'
+  /accounts/verify-email:
+    $ref: './schema/accounts/verify-email.yaml'
+  /accounts/forgot-password:
+    $ref: './schema/accounts/forgot-password.yaml'
+  /accounts/validate-reset-token:
+    $ref: './schema/accounts/validate-reset-token.yaml'
+  /accounts/reset-password:
+    $ref: './schema/accounts/reset-password.yaml'
+  /accounts:
+    $ref: './schema/accounts/accounts.yaml'
+  /accounts/{id}:
+    $ref: './schema/accounts/account.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid, or the user does not have access to perform the action
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Unauthorized"
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Not Found"

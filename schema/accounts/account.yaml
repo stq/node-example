@@ -1,0 +1,69 @@
+parameters:
+  - in: path
+    name: id
+    description: Account id
+    required: true
+    example: "5eb12e197e06a76ccdefc121"
+    schema:
+      type: string
+get:
+  summary: Get a single account by id
+  description: Admin users can access any account, regular users are restricted to their own account.
+  operationId: getAccountById
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Details of the specified account
+      content:
+        application/json:
+          schema:
+            $ref: '../types/account.yaml'
+    "404":
+      $ref: "#/components/responses/NotFoundError"
+    "401":
+      $ref: "#/components/responses/UnauthorizedError"
+put:
+  summary: Update an account
+  description: Admin users can update any account including role, regular users are restricted to their own account and cannot update role.
+  operationId: updateAccount
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../types/account-update-rq.yaml'
+  responses:
+    "200":
+      description: Account updated successfully. The details of the updated account are returned.
+      content:
+        application/json:
+          schema:
+            $ref: '../types/account.yaml'
+    "404":
+      $ref: "#/components/responses/NotFoundError"
+    "401":
+      $ref: "#/components/responses/UnauthorizedError"
+delete:
+  summary: Delete an account
+  description: Admin users can delete any account, regular users are restricted to their own account.
+  operationId: deleteAccount
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Account deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Account deleted successfully"
+    "404":
+      $ref: "#/components/responses/NotFoundError"
+    "401":
+      $ref: "#/components/responses/UnauthorizedError"

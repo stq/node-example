@@ -1,0 +1,22 @@
+type: object
+properties:
+  title:
+    type: string
+    example: "Mr"
+  firstName:
+    type: string
+    example: "Jason"
+  lastName:
+    type: string
+    example: "Watmore"
+  email:
+    type: string
+    example: "jason@example.com"
+  password:
+    type: string
+    example: "pass123"
+  confirmPassword:
+    type: string
+    example: "pass123"
+  acceptTerms:
+    type: boolean

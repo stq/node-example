@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: string
+    example: "5eb12e197e06a76ccdefc121"
+  title:
+    type: string
+    example: "Mr"
+  firstName:
+    type: string
+    example: "Jason"
+  lastName:
+    type: string
+    example: "Watmore"
+  email:
+    type: string
+    example: "jason@example.com"
+  role:
+    type: string
+    example: "Admin"
+  created:
+    type: string
+    example: "2020-05-05T09:12:57.848Z"

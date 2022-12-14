@@ -1,0 +1,36 @@
+post:
+  summary: Verify a new account with a verification token received by email after registration
+  operationId: verifyEmail
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+              example: "3c7f8d9c4cb348ff95a0b74a1452aa24fc9611bb76768bb9eafeeb826ddae2935f1880bc7713318f"
+          required:
+            - token
+  responses:
+    "200":
+      description: Verification was successful so you can now login to the account
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Verification successful, you can now login"
+    "400":
+      description: Verification failed due to an invalid token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Verification failed"

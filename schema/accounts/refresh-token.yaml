@@ -1,0 +1,34 @@
+post:
+  summary: Use a refresh token to generate a new JWT token and a new refresh token
+  description: The refresh token is sent and returned via cookies.
+  operationId: refreshToken
+  parameters:
+    - in: cookie
+      name: refreshToken
+      description: The `refreshToken` cookie
+      schema:
+        type: string
+        example: 51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550
+  responses:
+    "200":
+      description: Account details, a JWT access token and a new refresh token cookie
+      headers:
+        Set-Cookie:
+          description: "`refreshToken`"
+          schema:
+            type: string
+            example: refreshToken=51872eca5efedcf424db4cf5afd16a9d00ad25b743a034c9c221afc85d18dcd5e4ad6e3f08607550; Path=/; Expires=Tue, 16 Jun 2020 09:14:17 GMT; HttpOnly
+      content:
+        application/json:
+          schema:
+            $ref: '../types/account-authinfo.yaml'
+    "400":
+      description: The refresh token is invalid, revoked or expired
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Invalid token"
